@@ -8,13 +8,19 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "classnames": "^2.2.6",
+    "node-sass": "^4.13.1",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build -- --profile",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "npm test -- --coverage --watchAll=false",
+    "prebuild": "npm run flow && npm run lint",
+    "flow": "flow"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +36,41 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/src/theme/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/theme/",
+      "<rootDir>/src/serviceWorker.js",
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/App.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-react": "^7.19.0",
+    "flow-bin": "^0.120.1",
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1",
+    "pretty-quick": "^2.0.1"
   }
 }
